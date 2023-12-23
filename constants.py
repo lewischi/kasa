@@ -1,4 +1,8 @@
 from typing import Final
 
-OFFICE_SQUARE_LAMP: Final[str] = '192.168.4.38'
-PIXAR_LAMP: Final[str] = '192.168.4.24'
+LAMP_IPS = {
+    'office_square_lamp': '192.168.4.38',
+    'pixar_lamp': '192.168.4.24',
+}
+
+VALID_LAMPS = list(LAMP_IPS.keys())
