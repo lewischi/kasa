@@ -1,5 +1,7 @@
 import argparse
-from smart_plug import SmartPlug
+# from smart_plug import SmartPlug (deprecated)
+from kasa import Discover
+# from kasa import SmartPlug (deprecated)
 from constants import LAMP_IPS, VALID_LAMPS
 import asyncio
 
@@ -22,12 +24,21 @@ async def toggle(lamp_ip):
     await plug.turn_on()
   # print(f'Toggling smart plug at IP: {lamp_ip}')
 
+async def toggle_new(lamp_ip):
+  plug = await Discover.discover_single(lamp_ip)
+  await plug.update()
+
+  if plug.is_on:
+    await plug.turn_off()
+  elif plug.is_off:
+    await plug.turn_on()
+
 # Get the lamp IP based on the selected command
 lamp_ip = get_lamp_ip(args.lamp)
 
 # Check if the lamp IP is valid
 if lamp_ip is not None:
 # Run the toggle function
-  asyncio.run(toggle(lamp_ip))
+  asyncio.run(toggle_new(lamp_ip))
 else:
   print(f"Invalid lamp choice: {args.lamp}. Please choose from {', '.join(VALID_LAMPS)}")
