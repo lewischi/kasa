@@ -6,5 +6,7 @@ With documentation here:
 https://python-kasa.readthedocs.io/en/latest/tutorial.html
 
 ## Installation
+```
 brew install pipx
 pipx install python-kasa
+```
